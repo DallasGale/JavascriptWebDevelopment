@@ -1,23 +1,50 @@
-// Components
+////////////////
+// components //
+////////////////
 import Header from './components/header';
 import Content from './components/content';
 import Footer from './components/footer';
 
-// Styles
+
+////////////
+// styles //
+////////////
+
 import './index.scss';
 
-// App
-const App = () => {
+
+//////////////
+// template //
+//////////////
+
+var template = (function structure() {
+    { Header(); }
+    { Content(); }
+    { Footer(); }
+
+    // api
+    var publicAPI = {
+        header: Header,
+        content: Content,
+        footer: Footer, 
+    };
+    return publicAPI;
+})();
+
+
+/////////////////
+// application //
+/////////////////
+
+const app = () => {
     return (`
         <div>
-            ${ Header() }
-            ${ Content() }
-            ${ Footer() }
+            ${ template.header() }
+            ${ template.content() }
+            ${ template.footer() }
         </div>
-        `
+         `
     );
 };
 
-
-var $ = App();
-document.getElementById('root').innerHTML = $;
+document.getElementById('root').innerHTML = app();
